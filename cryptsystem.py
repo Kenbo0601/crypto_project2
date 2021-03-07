@@ -52,20 +52,52 @@ def get_p(q):
         return 2*q+1  # return p
 
 
-def genKeys():
+def genKeys(pvar):
     var = random.getrandbits(32)
     grab_prime(var)
-    print("prime:", var)
-
     q = get_q(var)
     p = get_p(q)
-    d = random.randrange(1, p-2)
-    e2 = pow(2, d, p)
-    return e2,d
+    while p <= pvar:
+        p = get_p(q)
+
+    d = random.randrange(1, p-2)  # private key
+    e2 = pow(2, d, p)  # public key
+    return e2, d, p
+
+
+def converter():
+    f = open("plaintext.txt", "r")
+    char = f.read()
+    f.close()
+
+    arr = []
+    for c in char:
+        temp = ord(c)
+        arr.append(bin(temp)[2:].zfill(8))
+    return int("".join(arr), 2)
+
+
+def encryption(e1, e2, p, P):
+    r = random.randrange(1, p-1)
+    c1 = pow(2, r, p)
+    tempP = P % p
+    tempe2 = pow(e2, r, p)
+    c2 = tempP*tempe2 % p
+    return c1, c2
 
 
 if __name__ == "__main__":
-    var = genKeys()
+    msg = converter()
+    keys = genKeys(msg)
+    e2 = keys[0]
+    d = keys[1]
+    p = keys[2]
+    cipher = encryption(2, e2, p, msg)
+    c1 = cipher[0]
+    c2 = cipher[1]
 
+    t1 = pow(c1, p-1-d, p)
+    t2 = c2 % p
+    P = t1*t2 % p
 
-
+    print(P)
