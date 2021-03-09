@@ -1,5 +1,6 @@
 import random
-import sys
+import os.path
+from os import path
 
 
 def is_prime(n):  # miller rabin test
@@ -79,14 +80,14 @@ def converter():
 
 def encryption(e1, e2, p, P):
     r = random.randrange(1, p-1)
-    c1 = pow(2, r, p)
+    c1 = pow(e1, r, p)
     tempP = P % p
     tempe2 = pow(e2, r, p)
     c2 = tempP*tempe2 % p
     return c1, c2
 
 
-if __name__ == "__main__":
+def driver():
     msg = converter()
     keys = genKeys(msg)
     e2 = keys[0]
@@ -96,8 +97,17 @@ if __name__ == "__main__":
     c1 = cipher[0]
     c2 = cipher[1]
 
-    t1 = pow(c1, p-1-d, p)
-    t2 = c2 % p
-    P = t1*t2 % p
+    if path.exists("ctext.txt"):
+        print("the file exists")
+    else:
+        print("nope")
 
-    print(P)
+    return
+
+
+if __name__ == "__main__":
+    driver()
+
+    #t1 = pow(c1, p-1-d, p)
+    #t2 = c2 % p
+    #P = t1*t2 % p
