@@ -14,8 +14,8 @@ def decrypt(p, d, c1, c2):
         arr.append(bits[i:i+8])
 
     n = int(bits, 2)
-    test = binascii.unhexlify('%x' % n)
-    print(test)
+    decipher = binascii.unhexlify('%x' % n).decode('utf-8')
+    print(decipher)
     return
 
 
