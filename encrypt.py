@@ -52,6 +52,7 @@ def driver(msg, p, g, e2):
         f.write(" ")
         f.write(str(c2))
         f.write("\n")
+    f.close()
     return
 
 

@@ -1,16 +1,16 @@
 import binascii
 
 
-def decrypt(p, d, c1, c2):
+def decrypt(p, d, c1, c2, file):
     t1 = pow(c1, p-1-d, p)
     t2 = c2 % p
     P = t1*t2 % p
-    print(P)
 
     bits = bin(P)
     n = int(bits, 2)
     decipher = binascii.unhexlify('%x' % n).decode('utf-8')
-    print(decipher)
+    file.write(decipher)
+    # print(decipher)
     return
 
 
@@ -35,10 +35,12 @@ def driver():
     c1 = ""
     c2 = ""
 
+    file = open("dtext.txt", "w")
     for block in list:
         c1 = int(block[0])
         c2 = int(block[1])
-        decrypt(p, d, c1, c2)
+        decrypt(p, d, c1, c2, file)
+    file.close()
     #c1 = int(cipher[0])
     #c2 = int(cipher[1])
 
