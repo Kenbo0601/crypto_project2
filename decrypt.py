@@ -17,10 +17,12 @@ def decrypt(p, d, c1, c2):
 def driver():
     cipher = ""
     key = ""
+    list = []
 
     f = open("ctext.txt", "r")
     for i in f:
         cipher = i.split()
+        list.append(cipher)
     f.close()
 
     k = open("prikey.txt", "r")
@@ -30,10 +32,17 @@ def driver():
 
     p = int(key[0])
     d = int(key[2])
-    c1 = int(cipher[0])
-    c2 = int(cipher[1])
+    c1 = ""
+    c2 = ""
 
-    decrypt(p, d, c1, c2)
+    for block in list:
+        c1 = int(block[0])
+        c2 = int(block[1])
+        decrypt(p, d, c1, c2)
+    #c1 = int(cipher[0])
+    #c2 = int(cipher[1])
+
+    #decrypt(p, d, c1, c2)
     return
 
 

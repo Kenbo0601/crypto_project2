@@ -1,16 +1,36 @@
 import random
+from os import path
 
 
 def converter():
     f = open("ptext.txt", "r")
     char = f.read()
+    list = []
+    fulltext = ""
+    for i in char:
+        list.append(i)
+        if " " in list:
+            list.remove(" ")
+    fulltext = "".join(list)
     f.close()
+    list.clear()
+
+    for j in range(0, len(fulltext), 4):
+        list.append(fulltext[j:j+4])
 
     arr = []
-    for c in char:
-        temp = ord(c)
-        arr.append(bin(temp)[2:].zfill(8))
-    return int("".join(arr), 2)
+    result = []
+    for i in list:
+        arr.clear()
+        for c in i:
+            temp = ord(c)
+            arr.append(bin(temp)[2:].zfill(8))
+        result.append(int("".join(arr), 2))
+    # for c in char:
+    #temp = ord(c)
+    # arr.append(bin(temp)[2:].zfill(8))
+    # return int("".join(arr), 2)
+    return result
 
 
 def encrypt(p, e1, e2, P):
@@ -22,6 +42,19 @@ def encrypt(p, e1, e2, P):
     return c1, c2
 
 
+def driver(msg, p, g, e2):
+    f = open("ctext.txt", "w")
+    for i in range(len(msg)):
+        cipher = encrypt(p, g, e2, msg[i])
+        c1 = cipher[0]
+        c2 = cipher[1]
+        f.write(str(c1))
+        f.write(" ")
+        f.write(str(c2))
+        f.write("\n")
+    return
+
+
 if __name__ == "__main__":
     msg = converter()
     char = ""
@@ -29,12 +62,12 @@ if __name__ == "__main__":
     for i in f:
         char = i.split()
     f.close()
-
+    driver(msg, int(char[0]), int(char[1]), int(char[2]))
     #p = char[0], g = char[1], e2 = char[2]
-    cipher = encrypt(int(char[0]), int(char[1]), int(char[2]), int(msg))
-    c1 = cipher[0]
-    c2 = cipher[1]
-    f = open("ctext.txt", "w")
-    f.write(str(c1))
-    f.write(" ")
-    f.write(str(c2))
+    #cipher = encrypt(int(char[0]), int(char[1]), int(char[2]), int(msg))
+    #c1 = cipher[0]
+    #c2 = cipher[1]
+    #f = open("ctext.txt", "w")
+    # f.write(str(c1))
+    #f.write(" ")
+    # f.write(str(c2))
