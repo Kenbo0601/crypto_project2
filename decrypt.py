@@ -1,4 +1,3 @@
-
 import binascii
 
 
@@ -8,11 +7,7 @@ def decrypt(p, d, c1, c2):
     P = t1*t2 % p
     print(P)
 
-    arr = []
     bits = bin(P)
-    for i in range(0, len(bits), 8):
-        arr.append(bits[i:i+8])
-
     n = int(bits, 2)
     decipher = binascii.unhexlify('%x' % n).decode('utf-8')
     print(decipher)
