@@ -1,7 +1,8 @@
 import random
+import secrets
 
 
-def is_prime(n):  # miller rabin test
+def miller_rabin(n):  # miller rabin test
     if n == 2:
         return True
     if n == 1 or n & 1 == 0:
@@ -27,47 +28,47 @@ def is_prime(n):  # miller rabin test
 
 
 def grab_prime(var):
-    while is_prime(var) == False:
-        var = random.getrandbits(33)
+    while miller_rabin(var) == False:
+        var = secrets.randbits(33)
         while len(bin(var)[2:]) < 33:
-            var = random.getrandbits(33)
+            var = secrets.randbits(33)
     # print(len(bin(var)[2:]))
     return var
 
 
 def get_q(var):
     while var % 12 != 5:
-        check = random.getrandbits(33)
+        check = secrets.randbits(33)
         while len(bin(check)[2:]) < 33:
-            check = random.getrandbits(33)
+            check = secrets.randbits(33)
         # print(len(bin(check)[2:]))
         var = grab_prime(check)
     return var
 
 
 def get_p(q):
-    p = is_prime(2*q+1)
-    if is_prime(p) == True:
+    p = miller_rabin(2*q+1)
+    if miller_rabin(p) == True:
         return p
     else:
-        check = random.getrandbits(33)
+        check = secrets.randbits(33)
         while len(bin(check)[2:]) < 33:
-            check = random.getrandbits(33)
+            check = secrets.randbits(33)
         prime = grab_prime(check)
         q = get_q(prime)
-        while is_prime(2*q+1) == False:
-            check = random.getrandbits(33)
+        while miller_rabin(2*q+1) == False:
+            check = secrets.randbits(33)
             while len(bin(check)[2:]) < 33:
-                check = random.getrandbits(33)
+                check = secrets.randbits(33)
             prime = grab_prime(check)
             q = get_q(prime)
         return 2*q+1  # return p
 
 
 def genKeys():
-    var = random.getrandbits(33)
+    var = secrets.randbits(33)
     while len(bin(var)[2:]) < 33:
-        var = random.getrandbits(33)
+        var = secrets.randbits(33)
     grab_prime(var)
     q = get_q(var)
     p = get_p(q)

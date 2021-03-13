@@ -1,7 +1,7 @@
 import binascii
 
 
-def decrypt(p, d, c1, c2, file):
+def decrypt(p, d, c1, c2, file,textbox):
     t1 = pow(c1, p-1-d, p)
     t2 = c2 % p
     P = t1*t2 % p
@@ -10,7 +10,7 @@ def decrypt(p, d, c1, c2, file):
     n = int(bits, 2)
     decipher = binascii.unhexlify('%x' % n).decode('utf-8')
     file.write(decipher)
-    # print(decipher)
+    textbox.append(decipher)
     return
 
 
@@ -35,16 +35,15 @@ def driver():
     c1 = ""
     c2 = ""
 
+    textbox = []
     file = open("dtext.txt", "w")
     for block in list:
         c1 = int(block[0])
         c2 = int(block[1])
-        decrypt(p, d, c1, c2, file)
+        decrypt(p, d, c1, c2, file,textbox)
     file.close()
-    #c1 = int(cipher[0])
-    #c2 = int(cipher[1])
-
-    #decrypt(p, d, c1, c2)
+    text = "".join(textbox)
+    print("Deccryption result: ",text)
     return
 
 

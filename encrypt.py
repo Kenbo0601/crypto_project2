@@ -11,7 +11,7 @@ def converter():
         list.append(i)
         if " " in list:
             list.remove(" ")
-    fulltext = "".join(list)
+    fulltext = "".join(list).strip("\n")
     f.close()
     list.clear()
 
@@ -26,10 +26,6 @@ def converter():
             temp = ord(c)
             arr.append(bin(temp)[2:].zfill(8))
         result.append(int("".join(arr), 2))
-    # for c in char:
-    #temp = ord(c)
-    # arr.append(bin(temp)[2:].zfill(8))
-    # return int("".join(arr), 2)
     return result
 
 
@@ -64,11 +60,3 @@ if __name__ == "__main__":
         char = i.split()
     f.close()
     driver(msg, int(char[0]), int(char[1]), int(char[2]))
-    #p = char[0], g = char[1], e2 = char[2]
-    #cipher = encrypt(int(char[0]), int(char[1]), int(char[2]), int(msg))
-    #c1 = cipher[0]
-    #c2 = cipher[1]
-    #f = open("ctext.txt", "w")
-    # f.write(str(c1))
-    #f.write(" ")
-    # f.write(str(c2))
