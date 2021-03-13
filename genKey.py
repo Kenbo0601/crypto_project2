@@ -32,7 +32,6 @@ def grab_prime(var):
         var = secrets.randbits(33)
         while len(bin(var)[2:]) < 33:
             var = secrets.randbits(33)
-    # print(len(bin(var)[2:]))
     return var
 
 
@@ -41,7 +40,6 @@ def get_q(var):
         check = secrets.randbits(33)
         while len(bin(check)[2:]) < 33:
             check = secrets.randbits(33)
-        # print(len(bin(check)[2:]))
         var = grab_prime(check)
     return var
 
