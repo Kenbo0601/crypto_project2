@@ -6,7 +6,7 @@ course section - CS485
 
 
 Implementation of a public key encryption called Cryptosystem.  
-The algorithm is similar to the Discrete Logarithm Problem.  
+The algorithm is similar to the Digital signature algorithm.  
 
 ### How to Build 
 1: python3 geKey.py  

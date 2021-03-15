@@ -2,7 +2,7 @@ import random
 from os import path
 
 
-def converter():
+def converter():  # convert from plaintext to integer
     f = open("ptext.txt", "r")
     char = f.read()
     list = []
@@ -29,7 +29,7 @@ def converter():
     return result
 
 
-def encrypt(p, e1, e2, P):
+def encrypt(p, e1, e2, P):  # encryption process
     r = random.randrange(1, p-1)
     c1 = pow(e1, r, p)
     tempP = P % p
@@ -38,7 +38,7 @@ def encrypt(p, e1, e2, P):
     return c1, c2
 
 
-def driver(msg, p, g, e2):
+def driver(msg, p, g, e2):  # driver function
     f = open("ctext.txt", "w")
     for i in range(len(msg)):
         cipher = encrypt(p, g, e2, msg[i])
@@ -60,3 +60,4 @@ if __name__ == "__main__":
         char = i.split()
     f.close()
     driver(msg, int(char[0]), int(char[1]), int(char[2]))
+    print("plaintext was successfully encrypted..")

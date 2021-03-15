@@ -1,7 +1,7 @@
 import binascii
 
 
-def decrypt(p, d, c1, c2, file,textbox):
+def decrypt(p, d, c1, c2, file, textbox):  # decryption process
     t1 = pow(c1, p-1-d, p)
     t2 = c2 % p
     P = t1*t2 % p
@@ -14,7 +14,7 @@ def decrypt(p, d, c1, c2, file,textbox):
     return
 
 
-def driver():
+def driver():  # driver function
     cipher = ""
     key = ""
     list = []
@@ -40,12 +40,12 @@ def driver():
     for block in list:
         c1 = int(block[0])
         c2 = int(block[1])
-        decrypt(p, d, c1, c2, file,textbox)
+        decrypt(p, d, c1, c2, file, textbox)
     file.close()
     text = "".join(textbox)
-    print("Deccryption result: ",text)
+    print("Deccryption result: \n", text)  # print the result
     return
 
 
 if __name__ == "__main__":
-    driver()
+    driver()  # call driver function
