@@ -25,3 +25,6 @@ The algorithm is similar to the Digital signature algorithm.
     -   dtext.txt #result of decrypting the ciphertext
     -   prikey.txt #contains private keys
     -   pubkey.txt #contains public keys
+
+### Source code for Miller Rabin prime number test
+https://qiita.com/srtk86/items/609737d50c9ef5f5dc59

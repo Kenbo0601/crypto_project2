@@ -3,6 +3,9 @@ import secrets
 
 
 def miller_rabin(n):  # miller rabin test
+    # source code for miller rabin prime number test
+    # https://qiita.com/srtk86/items/609737d50c9ef5f5dc59
+
     if n == 2:
         return True
     if n == 1 or n & 1 == 0:
